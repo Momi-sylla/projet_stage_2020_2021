@@ -51,15 +51,21 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
+                        @else 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        @if (Auth::user()->hasRole('admin'))
         <a class="nav-link" href="{{url('VueUser')}}">utilisateurs</a>
       </li>
+      @else
+      <a class="nav-link" href="#">rien du tout</a>
+      </li>
+      @endif
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           autre chose

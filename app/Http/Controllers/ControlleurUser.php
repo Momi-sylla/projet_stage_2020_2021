@@ -11,7 +11,9 @@ class ControlleurUser extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth');
+       $this->middleware('auth');
+       $this->middleware('role:admin');
+       
     }
     public function index(){
         $userlists = User::all();
@@ -25,12 +27,15 @@ class ControlleurUser extends Controller
         $nom = request('name');
         $email = request('email');
         $pass = request('password');
+        $role = request('role_id');
        
         $user = new User();
         $user->name = $nom;
         $user->email = $email;
         $user->password = hash::make($pass);
         $user->save();
+        $user->attachRole($role);
+        
                 return back();
 
         

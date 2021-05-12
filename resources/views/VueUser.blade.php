@@ -129,6 +129,14 @@
 					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 									</div>					
 				</div>
+				<div class="form-group">
+					<label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('Rôle') }}</label>
+
+					<select class="form-control" name="role_id">
+						<option value="user">user</option>
+						<option value="guest">guest</option>
+					</select>
+				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 				<button type="submit" class="btn btn-primary">
