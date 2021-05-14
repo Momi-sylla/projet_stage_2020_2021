@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+
 use Illuminate\Support\Facades\Hash;
 
 
@@ -17,9 +19,26 @@ class ControlleurUser extends Controller
     }
     public function index(){
         $userlists = User::all();
+       $roles = array();
+       $x=array();
+        foreach ($userlists as $list){
+            $x[]=User::find($list->id)->roles->each(function($r)
+            {
+                
+            return $r->name;
+            
 
-
-        return view('VueUser',compact('userlists'));
+            });  
+        }
+        foreach($x as $y){
+            foreach($y as $z){
+                $roles[]=$z->name;
+            }
+        } 
+         
+          //  print_r($userlists);
+         //  print_r($roles);
+        return view('VueUser',compact('userlists','roles'));
     }
 
 
@@ -60,7 +79,7 @@ class ControlleurUser extends Controller
     public function delete($id){
         $user= User::find($id);
         $user->delete();
-        return redirect()->route('index')->with('success', 'User updated successfully');
+        return redirect()->route('index')->with('success', 'User deleted successfully');
     }
     
 
