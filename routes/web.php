@@ -28,4 +28,5 @@ Route::match(['Post','Put'],'/VueUser/{id}',[App\Http\Controllers\ControlleurUse
 Route::get('/EditUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'edit'])->name('edit');
 Route::get('/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'delete'])->name('delete');
 
+Route::get('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'index'])->name('index');
 

@@ -57,10 +57,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
+      @if (Auth::user()->hasRole('admin'))
       <li class="nav-item">
-        @if (Auth::user()->hasRole('admin'))
         <a class="nav-link" href="{{url('VueUser')}}">utilisateurs</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('enseignants')}}">enseignants</a>
+      </li>
+      
       @else
       <a class="nav-link" href="#">rien du tout</a>
       </li>
@@ -68,7 +72,7 @@
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          autre chose
+        aaaa
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Action</a>
