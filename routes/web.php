@@ -30,3 +30,5 @@ Route::get('/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'delete
 
 Route::get('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'index'])->name('index');
 
+Route::post('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'store'])->name('store');
+
