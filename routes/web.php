@@ -24,11 +24,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/VueUser',[App\Http\Controllers\ControlleurUser::class, 'index'])->name('index');
 Route::post('/VueUser',[App\Http\Controllers\ControlleurUser::class, 'store'])->name('store');
+
 Route::match(['Post','Put'],'/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'update'])->name('update');
 Route::get('/EditUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'edit'])->name('edit');
 Route::get('/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'delete'])->name('delete');
 
 Route::get('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'index'])->name('index');
-
 Route::post('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'store'])->name('store');
 
+
+Route::get('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'index'])->name('index');
+Route::post('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'store'])->name('store');
+
+
+Route::get('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 'show'])->name('show');
+
+Route::post('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 'storeseances'])->name('storeseances');

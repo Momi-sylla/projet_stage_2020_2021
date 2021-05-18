@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Bienvenidos!') }}
+                    {{ __('Espace User!') }}
                 </div>
             </div>
         </div>

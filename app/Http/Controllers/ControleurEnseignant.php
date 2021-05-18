@@ -34,6 +34,7 @@ class ControleurEnseignant extends Controller
                  $roles[]=$z->id;
              }
          } 
+         
         
         return view('enseignants',compact('enseignants','roles','userlists'));
     }
@@ -47,7 +48,7 @@ class ControleurEnseignant extends Controller
         $user_infos = User::where('name','=',$nomens)->get();
         $ens_infos = Enseignants::where('nom','=',$nom)->get();
 
-      //  print_r($user_id);
+     
       $user_id=0;
         foreach($ens_infos as $u){
             $ens_id=($u->id);

@@ -19,4 +19,7 @@ class Enseignants extends Model
     public function users(){
         return $this->belongsToMany('App\Models\User','user_enseignants','id_ens','id_user');
         }
+    public function matieres(){
+        return $this->hasMany('App\Models\Matieres','id_ens');
+    }
 }

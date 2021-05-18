@@ -37,7 +37,7 @@ class ControlleurUser extends Controller
         } 
          
           //  print_r($userlists);
-         //  print_r($roles);
+          // print_r($roles);
         return view('VueUser',compact('userlists','roles'));
     }
 

@@ -27,7 +27,7 @@ class HomeController extends Controller
       {  return view('home');
       }
       elseif(request()->user()->hasRole('user')){
-        return view('users.index');  
+        return view('users.index');
     }
    
 }

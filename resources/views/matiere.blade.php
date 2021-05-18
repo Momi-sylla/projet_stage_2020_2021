@@ -8,7 +8,7 @@
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2> <b>Utilisateurs</b></h2>
+						<h2> <b>Matières</b></h2>
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
@@ -17,7 +17,7 @@
                                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                  </svg>
                             </i> 
-                            <span>nouvel utilisateur
+                            <span>Matiere
 
                             </span>
                         </a>
@@ -33,9 +33,9 @@
 							#
 						</th>
 						<th>Nom</th>
-						<th>Email</th>
-						<th>Date création</th>
-						<th>rôles</th>
+						<th>Nom Enseignant</th>
+						
+					
 						<th>Actions</th>
 					</tr>
                 </thead>
@@ -44,26 +44,31 @@
 				
 				
                 <tbody>
-				@for ($i=0;$i<count($userlists);$i++)
+				@for ($i=0;$i< count($matieres);$i++)
+
 					<tr>
 					
 						<td>
-						{{$userlists[$i]->id }}
-						</td>
-						<td>{{$userlists[$i]->name}}</td>
-						<td>{{$userlists[$i]->email }}</td>	
-						<td>{{$userlists[$i]->created_at }}</td>
-						<td>{{ $roles[$i] }}</td>
+						{{$matieres[$i]->id }}</td>
+						<td>{{ $matieres[$i]->nom }}</td>
+						<td>{{$ens_name[$i]}}</td>
 						
 						<td>
-							<a href="{{ route('edit',$userlists[$i]->id) }}">
+							<a href="{{ route('show',$matieres[$i]->id) }}">
+									<i class="material-icons" data-toggle="tooltip" title="show">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+										<path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+										</svg>
+									</i>
+							</a>
+							<a href="">
 									<i class="material-icons" data-toggle="tooltip" title="Edit">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
 										<path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
 										</svg>
 									</i>
 							</a>
-							<a href="{{ route('delete',$userlists[$i]->id) }}" >
+							<a href="" >
 							<i>  
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -73,8 +78,8 @@
 							</a>
 						</td>
                     </tr>
+				
 					@endfor
-
 					
 				
 					
@@ -85,10 +90,10 @@
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form method="POST" action="/VueUser">
+			<form method="POST" action="/matieres">
 			@csrf
 				<div class="modal-header">						
-					<h4 class="modal-title">Nouvel Utilisateur</h4>
+					<h4 class="modal-title">Nouvelle Matiere</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
@@ -105,40 +110,18 @@
                                 @enderror    
                         </div>
 					</div>
-					<div class="form-group">
-					<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E mail') }}</label>
-
-								<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-								@error('email')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-					</div>
-					<div class="form-group">
-					<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-	<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-	@error('password')
-		<span class="invalid-feedback" role="alert">
-			<strong>{{ $message }}</strong>
-		</span>
-	@enderror
-					</div>
+					
+					
 				<div class="form-group">
-					<label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-									</div>					
-				</div>
-				<div class="form-group">
-					<label for="user_id" class="col-md-4 col-form-label text-md-right">{{ __('Rôle') }}</label>
-
-					<select class="form-control" name="role_id">
-						<option value="user">user</option>
-						<option value="guest">guest</option>
+					<label for="ens_name" class="col-md-4 col-form-label text-md-right">{{ __('Nom enseignant') }}</label>
+					
+					<select class="form-control" name="ens_name">
+                   
+					@for ($i=0;$i < count($enseignants);$i++)
+						<option value="{{ $enseignants[$i]->nom }}"> {{ $enseignants[$i]->nom }}</option>
+					@endfor	
+					
+                        <option value="guest"></option>
 					</select>
 				</div>
 				<div class="modal-footer">
@@ -155,3 +138,4 @@
 
 
 @endsection
+
