@@ -17,8 +17,10 @@ class Accesstable1 extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_ens')->unsigned();
             $table->primary(array('id_user','id_ens'));
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_ens')->references('id')->on('enseignants');
+            $table->foreign('id_user')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_ens')->references('id')->on('enseignants')
+            ->onUpdate('cascade')->onDelete('cascade');
 
            });
     }

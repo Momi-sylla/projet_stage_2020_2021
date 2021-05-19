@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes(['register' => false]);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -29,14 +30,17 @@ Route::match(['Post','Put'],'/VueUser/{id}',[App\Http\Controllers\ControlleurUse
 Route::get('/EditUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'edit'])->name('edit');
 Route::get('/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'delete'])->name('delete');
 
-Route::get('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'index'])->name('index');
-Route::post('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'store'])->name('store');
+Route::get('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'indexEnseignants'])->name('indexEnseignants');
+Route::post('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'storeEnseignants'])->name('storeEnseignants');
 
 
-Route::get('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'index'])->name('index');
-Route::post('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'store'])->name('store');
+Route::get('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'indexMatieres'])->name('indexMatieres');
+Route::post('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'storeMatieres'])->name('storeMatieres');
 
 
 Route::get('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 'show'])->name('show');
 
 Route::post('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 'storeseances'])->name('storeseances');
+
+Route::get('/vueMatiere/{id}',[App\Http\Controllers\ControleurUserMatiere::class, 'userindex'])->name('userindex');
+

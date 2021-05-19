@@ -17,6 +17,7 @@ class Salles extends Migration
         Schema::create('salles', function (Blueprint $table){
             $table->id();
             $table->string('nom');
+            $table->string('capacite');
             
            });
     }

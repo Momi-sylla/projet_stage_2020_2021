@@ -20,8 +20,10 @@ class Parts extends Migration
             $table->bigInteger('id_mat')->unsigned();
             $table->integer('nb_ens');
             $table->integer('nb_salle');
-            $table->foreign('id_mat')->references('id')->on('matieres');
-            $table->foreign('type_part')->references('id')->on('typeparts');
+            $table->foreign('id_mat')->references('id')->on('matieres')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('type_part')->references('id')->on('typeparts')
+            ->onUpdate('cascade')->onDelete('cascade');
 
            });
     }

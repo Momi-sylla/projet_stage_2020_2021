@@ -17,7 +17,8 @@ class Matieres extends Migration
             $table->id();
             $table->string('nom');
             $table->bigInteger('id_ens')->unsigned();
-            $table->foreign('id_ens')->references('id')->on('enseignants');
+            $table->foreign('id_ens')->references('id')->on('enseignants')
+            ->onUpdate('cascade')->onDelete('cascade');
            });
     }
 

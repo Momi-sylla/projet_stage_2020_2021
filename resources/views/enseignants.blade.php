@@ -71,9 +71,7 @@
 						</td>
                     </tr>
 					@endfor
-
-					
-				
+	
 					
 </div>
 </div>

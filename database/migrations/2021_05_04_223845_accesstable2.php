@@ -17,8 +17,8 @@ class Accesstable2 extends Migration
             $table->bigInteger('id_seance')->unsigned();
             $table->bigInteger('id_salle')->unsigned();
             $table->primary(array('id_seance','id_salle'));
-            $table->foreign('id_seance')->references('id')->on('seances');
-            $table->foreign('id_salle')->references('id')->on('salles');
+            $table->foreign('id_seance')->references('id')->on('seances')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_salle')->references('id')->on('salles')->onUpdate('cascade')->onDelete('cascade');
 
            });
     }

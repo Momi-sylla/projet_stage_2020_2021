@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-       <img src="https://upload.wikimedia.org/wikipedia/fr/b/b9/Universit%C3%A9_d%27Angers_%28logo%29.svg" style="width:50%; "/>
+       <img src="https://upload.wikimedia.org/wikipedia/fr/b/b9/Universit%C3%A9_d%27Angers_%28logo%29.svg" style="width:50%; " class="img-fluid hover-shadow"/>
    
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -55,9 +55,7 @@
                         @else 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
+      
       @if (Auth::user()->hasRole('admin'))
       <li class="nav-item">
         <a class="nav-link" href="{{url('VueUser')}}">utilisateurs</a>
@@ -68,9 +66,19 @@
       <li class="nav-item">
         <a class="nav-link" href="{{url('matieres')}}">matières</a>
       </li>
-      @else
-      <a class="nav-link" href="#">rien du tout</a>
+      @elseif  (Auth::user()->hasRole('user'))
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Matieres
+        </a>
+       
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach($nom_mat as $nm)
+          <a class="dropdown-item" href="{{ route('userindex',$nm->id) }}">{{$nm->nom}}</a>
+          @endforeach
+        </div>
       </li>
+      
       @endif
 
             <li class="nav-item dropdown">

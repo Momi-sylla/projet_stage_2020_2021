@@ -15,7 +15,7 @@ class ControleurEnseignant extends Controller
         $this->middleware('role:admin');
     }
 
-    public function index(){
+    public function indexEnseignants(){
         $enseignants = Enseignants::all();
         $userlists = User::all();
         $roles = array();
@@ -38,7 +38,7 @@ class ControleurEnseignant extends Controller
         
         return view('enseignants',compact('enseignants','roles','userlists'));
     }
-    public function store(){
+    public function storeEnseignants(){
         $nom = request('name');
         $nomens = request('user_name');
         $enseignants = new Enseignants();

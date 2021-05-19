@@ -17,9 +17,11 @@ class Contraintesseances extends Migration
             $table->id();
             $table->bigInteger('id_seance')->unsigned();
             $table->bigInteger('type')->unsigned();
-            $table->foreign('id_seance')->references('id')->on('seances');
+            $table->foreign('id_seance')->references('id')->on('seances')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->string('arguments');
-            $table->foreign('type')->references('id')->on('typecontraintes');
+            $table->foreign('type')->references('id')->on('typecontraintes')
+            ->onUpdate('cascade')->onDelete('cascade');
 
            });
     }

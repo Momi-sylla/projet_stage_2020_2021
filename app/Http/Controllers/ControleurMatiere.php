@@ -16,7 +16,7 @@ class ControleurMatiere extends Controller
         $this->middleware('role:admin');
     }
 
-    public function index(){
+    public function indexMatieres(){
        $matieres = Matieres::all();
         $enseignants = Enseignants::all();
        $ens_name = array();
@@ -29,7 +29,7 @@ class ControleurMatiere extends Controller
         return view('matiere',compact('matieres','enseignants','ens_name'));
     }
 
-public function store(){
+public function storeMatieres(){
         $nom = request('name');
         $nomens = request('ens_name');
      
@@ -63,6 +63,7 @@ public function store(){
        $infos_seances_cm = Seances::where('id_part','=',$idpart)->get();
        $cpt_cm= count($infos_seances_cm);
 
+       $idpart = 0;
        $td_infos= Parts::where('nom','=','TD')->where('id_mat','=',$id)->get();
        foreach($td_infos as $infos){
            $idpart = $infos->id;
@@ -71,6 +72,7 @@ public function store(){
       $infos_seances_td = Seances::where('id_part','=',$idpart)->get();
       $cpt_td= count($infos_seances_td);
 
+      $idpart = 0;
       $tp_infos= Parts::where('nom','=','TP')->where('id_mat','=',$id)->get();
       foreach($tp_infos as $infos){
           $idpart = $infos->id;
@@ -78,7 +80,8 @@ public function store(){
     
      $infos_seances_tp = Seances::where('id_part','=',$idpart)->get();
      $cpt_tp= count($infos_seances_tp);
-
+     
+     $idpart = 0;
      $ctd_infos= Parts::where('nom','=','CTD')->where('id_mat','=',$id)->get();
      foreach($ctd_infos as $infos){
          $idpart = $infos->id;

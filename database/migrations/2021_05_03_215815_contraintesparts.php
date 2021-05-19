@@ -18,8 +18,10 @@ class Contraintesparts extends Migration
             $table->bigInteger('id_part')->unsigned();
             $table->bigInteger('type')->unsigned();
             $table->string('arguments');
-            $table->foreign('id_part')->references('id')->on('parts');
-            $table->foreign('type')->references('id')->on('typecontraintes');
+            $table->foreign('id_part')->references('id')->on('parts')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('type')->references('id')->on('typecontraintes')
+            ->onUpdate('cascade')->onDelete('cascade');
 
            });
     }
