@@ -15,20 +15,20 @@
                         </thead>
                         <tbody>
                             <tr>
-                            <th scope="row">Nombre de séances CM</th>
-                            <td>{{$cpt_cm}}</td>
+                                <th scope="row">Nombre de séances CM</th>
+                                <td>{{$cpt_cm}}</td>
                             </tr>
                             <tr>
-                            <th scope="row">Nombre de séances TD</th>
-                            <td>{{$cpt_td}}</td>
+                                <th scope="row">Nombre de séances TD</th>
+                                <td>{{$cpt_td}}</td>
                             </tr>
                             <tr>
-                            <th scope="row">Nombre de séances TP</th>
-                            <td>{{$cpt_tp}}</td>
+                                <th scope="row">Nombre de séances TP</th>
+                                <td>{{$cpt_tp}}</td>
                             </tr>
                             <tr>
-                            <th scope="row">Nombre de séances CTD</th>
-                            <td>{{$cpt_ctd}}</td>
+                                <th scope="row">Nombre de séances CTD</th>
+                                <td>{{$cpt_ctd}}</td>
                             </tr>
                         </tbody>
                     </table>

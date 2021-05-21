@@ -43,12 +43,10 @@
 				
 				
                 <tbody>
-				@for ($i=0;$i<count($enseignants);$i++)
+				    @for ($i=0;$i<count($enseignants);$i++)
 					<tr>
 					
-						<td>
-						{{$enseignants[$i]->id }}
-						</td>
+						<td>{{$enseignants[$i]->id }}</td>
 						<td>{{$enseignants[$i]->nom}}</td>
 						<td>{{$roles[$i] }}</td>
 						
@@ -70,11 +68,12 @@
 							</a>
 						</td>
                     </tr>
-					@endfor
-	
+                    @endfor
+                </tbody>
+            </table>
 					
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <div id="addEmployeeModal" class="modal fade">

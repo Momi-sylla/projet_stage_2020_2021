@@ -2,144 +2,153 @@
 
 @section('content')
 <div>
-<table class="table table-striped ">
-<thead>
-    <tr>
-      <th scope="col">Seances</th>
-      <th scope="col">nombre de salles</th>
-      <th scope="col">Nombre d'enseignants</th>
-    </tr>
-  <thead>
-    <tr>
-      <th scope="col">Seances</th>
-      <th scope="col">Salles</th>
-      <th scope="col">Nombre d'enseignants</th>
-      <th scope="col">contraintes</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  @if(gettype($seances_cm)=='object')
-  @for ($i=0;$i< count($seances_cm);$i++)
-    <tr>
-      <th scope="row">{{ $parts_cm[0]->nom.strval($i+1) }}</th>
-      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_cm[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
-                       
-                       </i>
-                      @if(!empty($salle_se[$i]))
-                      @foreach($salle_se[$i] as $sal)
-                        {{ $sal["nom"] }}
-                        @endforeach
-                      @else
-                      choisir
-                      @endif
-                    </a></td>
-      <td></td>
-      <td></td>
-      <td>	
-        <a href="#editEmployeeModal" class="edit" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="show">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                    </svg>
-           </i></a>
-
-        </td>
+    <table class="table table-striped ">
+    
+        <thead>
+            <tr>
+                <th scope="col">Seances</th>
+                <th scope="col">Salles</th>
+                <th scope="col">contraintes</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(gettype($seances_cm)=='object')
+            @for ($i=0;$i< count($seances_cm);$i++)
+            <tr>
+                <th scope="row">{{ $parts_cm[0]->nom.strval($i+1) }}</th>
+                <td>
+                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_cm[$i]->id }}" >
+                        <i class="material-icons" data-toggle="tooltip" title="show"></i>
+                        @if(!empty($salle_se[$i]))
+                        @foreach($salle_se[$i] as $sal)
+                            {{ $sal["nom"] }}
+                            @endforeach
+                        @else
+                        choisir
+                        @endif
+                    </a>
+                </td>
      
-    </tr>
-   @endfor 
-   @endif
+                <td></td>
+                <td>	
+                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"> 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                            </svg>
+                        </i>
+                    </a>
 
-   @if(gettype($seances_td)=='object')
-   @for ($i=0;$i< count($seances_td);$i++)
-    <tr>
-      <th scope="row">{{ $parts_td[0]->nom.strval($i+1) }}</th>
-      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="show">
-                       
-          </i> <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_td[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
-          @if(!empty($salle_td[$i]))
-                      @foreach($salle_td[$i] as $sal)
-                        {{ $sal["nom"] }}
-                        @endforeach
-                      @else
-                      choisir
-                      @endif
-                       </i>
+                </td>
+     
+             </tr>
+            @endfor 
+            @endif
+
+            @if(gettype($seances_td)=='object')
+            @for ($i=0;$i< count($seances_td);$i++)
+            <tr>
+                <th scope="row">{{ $parts_td[0]->nom.strval($i+1) }}</th>
+                <td>
+                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_td[$i]->id }}" > 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                            @if(!empty($salle_td[$i]))
+                                        @foreach($salle_td[$i] as $sal)
+                                            {{ $sal["nom"] }}
+                                            @endforeach
+                                        @else
+                                        choisir
+                                        @endif
+                        </i>
                      
                     </a>
-</td>
-      <td></td>
-      <td></td>
-      <td>	
-        
-        </td>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
      
-    </tr>
-   @endfor 
-   @endif
-   @if(gettype($seances_tp)=='object')
-   @for ($i=0;$i< count($seances_tp);$i++)
-    <tr>
-      <th scope="row">{{ $parts_tp[0]->nom.strval($i+1) }}</th>
-      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_tp[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
-                    @if(!empty($salle_tp[$i]))
-                      @foreach($salle_tp[$i] as $sal)
-                        {{ $sal["nom"] }}
-                        @endforeach
-                      @else
-                      choisir
-                      @endif  
-                       </i>
-                    
-                    </a></td>
-      <td></td>
-      <td></td>
-      <td>	
-        <a href="#editEmployeeModal" class="edit" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="show">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                    </svg>
-           </i></a>
+            </tr>
+            @endfor 
+            @endif
 
-        </td>
+            @if(gettype($seances_tp)=='object')
+            @for ($i=0;$i< count($seances_tp);$i++)
+
+            <tr>
+                <th scope="row">{{ $parts_tp[0]->nom.strval($i+1) }}</th>
+                <td>
+                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_tp[$i]->id }}" > 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                                @if(!empty($salle_tp[$i]))
+                                @foreach($salle_tp[$i] as $sal)
+                                    {{ $sal["nom"] }}
+                                    @endforeach
+                                @else
+                                choisir
+                                @endif  
+                        </i>
+                                
+                    </a>
+                </td>
+                <td></td>
+      
+                <td>	
+                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"> 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                            </svg>
+                        </i>
+                    </a>
+
+                </td>
      
-    </tr>
-   @endfor 
-   @endif
-   @if(gettype($seances_ctd)=='object')
-   @for ($i=0;$i< count($seances_ctd);$i++)
-    <tr>
-      <th scope="row">{{ $parts_ctd[0]->nom.strval($i+1) }}</th>
-      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_ctd[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
-                       
-      @if(!empty($salle_ctd[$i]))
-                      @foreach($salle_ctd[$i] as $sal)
-                        {{ $sal["nom"] }}
-                        @endforeach
-                      @else
-                      choisir
-                      @endif     
-                    </a></td>
-      <td></td>
-      <td></td>
-      <td>	
-        <a href="#editEmployeeModal" class="edit" data-toggle="modal" > <i class="material-icons" data-toggle="tooltip" title="show">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                    </svg>
-           </i></a>
+            </tr>
+            @endfor 
+            @endif
 
-        </td>
+            @if(gettype($seances_ctd)=='object')
+            @for ($i=0;$i< count($seances_ctd);$i++)
+            <tr>
+                <th scope="row">{{ $parts_ctd[0]->nom.strval($i+1) }}</th>
+                <td>
+                    <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_ctd[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
+                                
+                @if(!empty($salle_ctd[$i]))
+                                @foreach($salle_ctd[$i] as $sal)
+                                    {{ $sal["nom"] }}
+                                    @endforeach
+                                @else
+                                choisir
+                                @endif     
+                                </a>
+                </td>
+                <td></td>
      
-    </tr>
-   @endfor 
-   @endif
+                <td>	
+                    <a href="#editEmployeeModa" class="edit" data-toggle="modal" > 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                            </svg>
+                        </i>
+                    </a>
 
-  </tbody>
-</table>
+                </td>
+     
+            </tr>
+            @endfor 
+            @endif
+
+        </tbody>
+    </table>
 </div>
+
+
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -164,6 +173,29 @@
 					<input type="submit" class="btn btn-info" value="Save">
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="editEmployeeModa" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<table class="table table-striped ">
+    
+            <thead>
+                <tr>
+                <th scope="col">Parts</th>
+                </tr>   
+                <tr>
+                <th scope="col"></th>
+                <th scope="col">Nombre d'enseignants</th>
+                <th scope="col">Nombre de salles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td></td>	
 		</div>
 	</div>
 </div>
