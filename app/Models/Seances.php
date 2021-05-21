@@ -13,4 +13,7 @@ class Seances extends Model
     public function parts(){
         return $this->BelongsTo('App\Models\Parts','id_ens') ;
     }
+    public function salles(){
+        return $this->belongsToMany('App\Models\Salles','salles_seances','id_seance','id_salle');
+        }
 }

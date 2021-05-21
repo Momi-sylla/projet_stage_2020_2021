@@ -3,6 +3,12 @@
 @section('content')
 <div>
 <table class="table table-striped ">
+<thead>
+    <tr>
+      <th scope="col">Seances</th>
+      <th scope="col">nombre de salles</th>
+      <th scope="col">Nombre d'enseignants</th>
+    </tr>
   <thead>
     <tr>
       <th scope="col">Seances</th>
@@ -17,7 +23,17 @@
   @for ($i=0;$i< count($seances_cm);$i++)
     <tr>
       <th scope="row">{{ $parts_cm[0]->nom.strval($i+1) }}</th>
-      <td></td>
+      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_cm[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
+                       
+                       </i>
+                      @if(!empty($salle_se[$i]))
+                      @foreach($salle_se[$i] as $sal)
+                        {{ $sal["nom"] }}
+                        @endforeach
+                      @else
+                      choisir
+                      @endif
+                    </a></td>
       <td></td>
       <td></td>
       <td>	
@@ -38,17 +54,24 @@
    @for ($i=0;$i< count($seances_td);$i++)
     <tr>
       <th scope="row">{{ $parts_td[0]->nom.strval($i+1) }}</th>
-      <td></td>
+      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="show">
+                       
+          </i> <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_td[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
+          @if(!empty($salle_td[$i]))
+                      @foreach($salle_td[$i] as $sal)
+                        {{ $sal["nom"] }}
+                        @endforeach
+                      @else
+                      choisir
+                      @endif
+                       </i>
+                     
+                    </a>
+</td>
       <td></td>
       <td></td>
       <td>	
-        <a href="#editEmployeeModal" class="edit" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="show">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                    </svg>
-           </i></a>
-
+        
         </td>
      
     </tr>
@@ -58,7 +81,17 @@
    @for ($i=0;$i< count($seances_tp);$i++)
     <tr>
       <th scope="row">{{ $parts_tp[0]->nom.strval($i+1) }}</th>
-      <td></td>
+      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_tp[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
+                    @if(!empty($salle_tp[$i]))
+                      @foreach($salle_tp[$i] as $sal)
+                        {{ $sal["nom"] }}
+                        @endforeach
+                      @else
+                      choisir
+                      @endif  
+                       </i>
+                    
+                    </a></td>
       <td></td>
       <td></td>
       <td>	
@@ -78,11 +111,20 @@
    @for ($i=0;$i< count($seances_ctd);$i++)
     <tr>
       <th scope="row">{{ $parts_ctd[0]->nom.strval($i+1) }}</th>
-      <td></td>
+      <td><a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_ctd[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
+                       
+      @if(!empty($salle_ctd[$i]))
+                      @foreach($salle_ctd[$i] as $sal)
+                        {{ $sal["nom"] }}
+                        @endforeach
+                      @else
+                      choisir
+                      @endif     
+                    </a></td>
       <td></td>
       <td></td>
       <td>	
-        <a href="#editEmployeeModal" class="edit" data-toggle="modal"> <i class="material-icons" data-toggle="tooltip" title="show">
+        <a href="#editEmployeeModal" class="edit" data-toggle="modal" > <i class="material-icons" data-toggle="tooltip" title="show">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                         <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
                         <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
@@ -101,29 +143,22 @@
 <div id="editEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form method="POST" action="{{ route('editseancesalle') }}">
+                @csrf
 				<div class="modal-header">						
-					<h4 class="modal-title">Edit Employee</h4>
+					<h4 class="modal-title">Choisissez Les Salles</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
-				<div class="modal-body">					
-					<div class="form-group">
-						<label>Name</label>
-						<input type="text" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Address</label>
-						<textarea class="form-control" required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" required>
-					</div>					
-				</div>
+                <input id="nameseance" type="hidden" class="form-control @error('name') is-invalid @enderror" name="nameseance" value="">
+                
+                    @foreach ($salles as $sal)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ $sal->nom }}" id="flexCheckChecked" name="namesalle[]" >
+                    <label class="form-check-label" for="flexCheckChecked">
+                    {{ $sal->nom }}  Capacité : {{ $sal->capacite }}
+                    </label>
+                    </div>
+                    @endforeach	
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 					<input type="submit" class="btn btn-info" value="Save">

@@ -43,4 +43,5 @@ Route::get('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, '
 Route::post('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 'storeseances'])->name('storeseances');
 
 Route::get('/vueMatiere/{id}',[App\Http\Controllers\ControleurUserMatiere::class, 'userindex'])->name('userindex');
+Route::post('editseancesalle',[App\Http\Controllers\ControleurUserMatiere::class, 'editseancesalle'])->name('editseancesalle');
 
