@@ -21,8 +21,8 @@
                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_cm[$i]->id }}" >
                         <i class="material-icons" data-toggle="tooltip" title="show"></i>
                         @if(!empty($salle_se[$i]))
-                        @foreach($salle_se[$i] as $sal)
-                            {{ $sal["nom"] }}
+                            @foreach($salle_se[$i] as $sal)
+                                {{ $sal["nom"] }}
                             @endforeach
                         @else
                         choisir
@@ -30,10 +30,23 @@
                     </a>
                 </td>
      
-                <td></td>
+                <td>
+                    <a href="#addconstraint" class="addconstraint" data-toggle="modal" data-id="{{ $seances_cm[$i]->id }}" > 
+                        <i class="material-icons" data-toggle="tooltip" title="ajouter">
+                            @if(!empty($typecontseance[$i][0]))
+                                @foreach($typecontseance[$i] as $infocont)
+                                {{$infocont->nom}} { {{$infocont->arguments }}}
+                                @endforeach
+                            @else
+                            Ajouter
+                            @endif
+                        </i>
+                                
+                    </a>
+                </td>
                 <td>	
                     <a href="#editEmployeeModal" class="edit" data-toggle="modal"> 
-                        <i class="material-icons" data-toggle="tooltip" title="show">
+                        <i class="material-icons" data-toggle="tooltip" title="parametres">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
                                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
@@ -53,19 +66,18 @@
                 <th scope="row">{{ $parts_td[0]->nom.strval($i+1) }}</th>
                 <td>
                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_td[$i]->id }}" > 
-                        <i class="material-icons" data-toggle="tooltip" title="show">
+                        <i class="material-icons" data-toggle="tooltip" title="seances">
                             @if(!empty($salle_td[$i]))
-                                        @foreach($salle_td[$i] as $sal)
-                                            {{ $sal["nom"] }}
-                                            @endforeach
-                                        @else
-                                        choisir
-                                        @endif
+                                @foreach($salle_td[$i] as $sal)
+                                    {{ $sal["nom"] }}
+                                @endforeach
+                            @else
+                                    choisir
+                            @endif
                         </i>
                      
                     </a>
                 </td>
-                <td></td>
                 <td></td>
                 <td></td>
      
@@ -82,17 +94,24 @@
                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_tp[$i]->id }}" > 
                         <i class="material-icons" data-toggle="tooltip" title="show">
                                 @if(!empty($salle_tp[$i]))
-                                @foreach($salle_tp[$i] as $sal)
-                                    {{ $sal["nom"] }}
+                                    @foreach($salle_tp[$i] as $sal)
+                                        {{ $sal["nom"] }}
                                     @endforeach
                                 @else
-                                choisir
+                                    choisir
                                 @endif  
                         </i>
                                 
                     </a>
                 </td>
-                <td></td>
+                <td>
+                    <a href="#addconstraint" class="addconstraint" data-toggle="modal" data-id="{{ $seances_tp[$i]->id }}" > 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                               ajouter
+                        </i>
+                                
+                    </a>
+                </td>
       
                 <td>	
                     <a href="#editEmployeeModal" class="edit" data-toggle="modal"> 
@@ -117,16 +136,23 @@
                 <td>
                     <a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ $seances_ctd[$i]->id }}" > <i class="material-icons" data-toggle="tooltip" title="show">
                                 
-                @if(!empty($salle_ctd[$i]))
-                                @foreach($salle_ctd[$i] as $sal)
-                                    {{ $sal["nom"] }}
-                                    @endforeach
-                                @else
+                        @if(!empty($salle_ctd[$i]))
+                            @foreach($salle_ctd[$i] as $sal)
+                                {{ $sal["nom"] }}
+                            @endforeach
+                        @else
                                 choisir
-                                @endif     
-                                </a>
+                        @endif     
+                    </a>
                 </td>
-                <td></td>
+                <td>
+                    <a href="#addconstraint" class="addconstraint" data-toggle="modal" data-id="{{ $seances_ctd[$i]->id }}" > 
+                        <i class="material-icons" data-toggle="tooltip" title="show">
+                                ajouter
+                        </i>
+                                
+                    </a>
+                </td>
      
                 <td>	
                     <a href="#editEmployeeModa" class="edit" data-toggle="modal" > 
@@ -169,8 +195,8 @@
                     </div>
                     @endforeach	
 				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Save">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="annuler">
+					<input type="submit" class="btn btn-info" value="valider">
 				</div>
 			</form>
 		</div>
@@ -179,23 +205,42 @@
 
 
 
-<div id="editEmployeeModa" class="modal fade">
+<div id="addconstraint" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-		<table class="table table-striped ">
-    
-            <thead>
-                <tr>
-                <th scope="col">Parts</th>
-                </tr>   
-                <tr>
-                <th scope="col"></th>
-                <th scope="col">Nombre d'enseignants</th>
-                <th scope="col">Nombre de salles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <td></td>	
+        <form method="POST" action="{{ route('ajoutcontrainte') }}">
+                @csrf
+				<div class="modal-header">						
+					<h4 class="modal-title">Ajouter les Contraintes</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+                
+                <input id="constraint" type="hidden" class="form-control @error('name') is-invalid @enderror" name="constraint" value="">
+               
+                <label for="typeconstr" class="col-md-4 col-form-label text-md-right">{{ __('Type de contrainte') }}</label>
+
+                <select class="form-control" name="typeconstr">
+                @foreach($typecontraintes as $type)
+				    <option value="{{ $type->nom }}"> {{ $type->nom }} </option>
+                @endforeach
+                </select>
+              
+                    <label for="argument" class="col-md-4 col-form-label text-md-right">{{__('Arguments') }}</label>
+
+                    <input id="argument" type="text" class="form-control @error('name') is-invalid @enderror" name="argument" value="" required autocomplete="name" autofocus>
+
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror    
+              
+						
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="annuler">
+					<input type="submit" class="btn btn-info" value="valider">
+				</div>
+			</form
 		</div>
 	</div>
 </div>

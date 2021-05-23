@@ -12,6 +12,9 @@ use App\Models\Typeparts;
 use App\Models\User;
 use App\Models\Salles;
 use App\Models\Salles_seances;
+use App\Models\Typecontraintes;
+use App\Models\Contraintesseances;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -39,6 +42,8 @@ class ControleurUserMatiere extends Controller
 
         $nom_mat=Matieres::where('id_ens','=',$ens_id)->get();
           $salle_se = array() ;
+          $cont =array();
+          $typecontseance = array();
         $parts_cm = Parts::where('id_mat','=',$id)->where('nom','like','CM%')->get();
           $seances_cm = array();
             foreach($parts_cm as $pcm){
@@ -48,11 +53,22 @@ class ControleurUserMatiere extends Controller
                     $x = array();
                     foreach($seances_cm as $scm){
                         $x [] = Seances::find($scm->id)->salles->toArray();
-                    //    dd($x);
+
+                        $typecontseance [] = DB::table('seances')->join('contraintesseances', 'seances.id', '=', 'contraintesseances.id_seance')
+                        ->join('typecontraintes','contraintesseances.type','=','typecontraintes.id')
+                        ->where('seances.id','=',$scm->id)
+                        ->select('contraintesseances.arguments','typecontraintes.nom')->get();
 
                     }
+
+                   
+                
+                    
                     $salle_se=$x;
                 
+                    
+                 //   dd($typecontseance);
+
                   
                    
                 }
@@ -112,9 +128,11 @@ class ControleurUserMatiere extends Controller
             }
             $salles = Salles::get();
          
-           // dd($salles_se[0][0]->nom);
+            $typecontraintes = Typecontraintes::all();
+           // dd($typecontraintes);
 
-        return View('users.VueMatiere',compact('nom_mat','seances_cm','parts_cm','seances_td','parts_td','seances_tp','parts_tp','seances_ctd','parts_ctd','salles','salle_se','salle_td','salle_tp','salle_ctd'));
+
+        return View('users.VueMatiere',compact('nom_mat','seances_cm','parts_cm','seances_td','parts_td','seances_tp','parts_tp','seances_ctd','parts_ctd','salles','salle_se','salle_td','salle_tp','salle_ctd','typecontraintes','typecontseance'));
     }
 
     public function editseancesalle(){
@@ -131,5 +149,20 @@ class ControleurUserMatiere extends Controller
         
        }
        return back();
+    }
+
+    public function ajoutcontrainte(){
+        $id_seance = (int)request('constraint');
+        $type = request('typeconstr');
+        $type_id = Typecontraintes::where('nom','=',$type)->get();
+    //    dd($type_id);
+        $arg = request('argument');
+      //  dd($arg);
+      $contrainte = new Contraintesseances();
+      $contrainte->id_seance = $id_seance;
+      $contrainte->type = $type_id[0]->id;
+      $contrainte->arguments = $arg;
+      $contrainte->save();
+        return back();
     }
 }

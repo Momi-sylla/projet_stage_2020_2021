@@ -44,4 +44,4 @@ Route::post('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 
 
 Route::get('/vueMatiere/{id}',[App\Http\Controllers\ControleurUserMatiere::class, 'userindex'])->name('userindex');
 Route::post('editseancesalle',[App\Http\Controllers\ControleurUserMatiere::class, 'editseancesalle'])->name('editseancesalle');
-
+Route::post('ajoutcontrainte',[App\Http\Controllers\ControleurUserMatiere::class, 'ajoutcontrainte'])->name('ajoutcontrainte');
