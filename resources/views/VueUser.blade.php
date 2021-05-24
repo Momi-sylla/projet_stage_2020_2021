@@ -61,7 +61,8 @@
 										</svg>
 									</i>
 							</a>
-							<a href="{{ route('delete',$userlists[$i]->id) }}" >
+							
+							<a href="#deleteuserModal" class="deleteuser" data-toggle="modal" data-id="{{ $userlists[$i]->id }}" >
 								<i>  
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -79,6 +80,28 @@
 	</div>
 </div>
 
+<div id="deleteuserModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="Post" action="{{ route('delete')  }} ">
+			@csrf
+				<div class="modal-header">						
+					<h4 class="modal-title">Supprimer Utilisateurs</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>êtes vous sûr de vouloir supprimmer cet utilisateur ?</p>
+					<p class="text-danger"><small>Cette action est irreversible</small></p>
+					<input type="hidden" name="valeurusersup" id="valeurusersup" value="">
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 <div id="addEmployeeModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">

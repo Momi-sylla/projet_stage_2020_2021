@@ -28,10 +28,12 @@ Route::post('/VueUser',[App\Http\Controllers\ControlleurUser::class, 'store'])->
 
 Route::match(['Post','Put'],'/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'update'])->name('update');
 Route::get('/EditUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'edit'])->name('edit');
-Route::get('/VueUser/{id}',[App\Http\Controllers\ControlleurUser::class, 'delete'])->name('delete');
+Route::post('/deleteuser',[App\Http\Controllers\ControlleurUser::class, 'delete'])->name('delete');
 
 Route::get('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'indexEnseignants'])->name('indexEnseignants');
 Route::post('/enseignants',[App\Http\Controllers\ControleurEnseignant::class, 'storeEnseignants'])->name('storeEnseignants');
+Route::post('deletecontr',[App\Http\Controllers\ControleurEnseignant::class, 'deletecontr'])->name('deletecontr');
+
 
 
 Route::get('/matieres',[App\Http\Controllers\ControleurMatiere::class, 'indexMatieres'])->name('indexMatieres');
@@ -45,4 +47,3 @@ Route::post('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 
 Route::get('/vueMatiere/{id}',[App\Http\Controllers\ControleurUserMatiere::class, 'userindex'])->name('userindex');
 Route::post('editseancesalle',[App\Http\Controllers\ControleurUserMatiere::class, 'editseancesalle'])->name('editseancesalle');
 Route::post('ajoutcontrainte',[App\Http\Controllers\ControleurUserMatiere::class, 'ajoutcontrainte'])->name('ajoutcontrainte');
-Route::post('deletecontr',[App\Http\Controllers\ControleurUserMatiere::class, 'deletecontr'])->name('deletecontr');

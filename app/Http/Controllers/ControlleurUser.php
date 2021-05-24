@@ -55,7 +55,7 @@ class ControlleurUser extends Controller
         $user->save();
         $user->attachRole($role);
         
-                return back();
+                return back()->with('success', 'Utilisateur Créé Avec Succès');
 
         
     }
@@ -73,13 +73,15 @@ class ControlleurUser extends Controller
         $user->email = $email;
         $user->save();
 
-        return redirect()->route('index')->with('success', 'User updated successfully');
+        return redirect()->route('index')->with('success', 'Utilisateur modifié avec succès');
     }
 
-    public function delete($id){
+    public function delete(){
+        $id =request('valeurusersup');
+      //  dd($id);
         $user= User::find($id);
         $user->delete();
-        return redirect()->route('index')->with('success', 'User deleted successfully');
+        return redirect()->route('index')->with('success', 'utilisateur supprimé avec succès');
     }
     
 

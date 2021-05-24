@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Enseignants;
 use App\Models\User;
 use App\Models\User_enseignants;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ControleurEnseignant extends Controller
@@ -62,5 +64,11 @@ class ControleurEnseignant extends Controller
 
            return back();
 
+    }
+    public function deletecontr(){
+        $valeursup = (int) request('valeursup');
+       // dd($valeursup);
+       DB::delete('delete from enseignants where id = ?',[$valeursup]);
+       return back()->with('success', 'Suppression effectuée Avec Succès');;
     }
 }

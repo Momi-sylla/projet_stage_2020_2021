@@ -51,14 +51,14 @@
 						<td>{{$roles[$i] }}</td>
 						
 						<td>
-							<a href="{{ route('edit',$enseignants[$i]->id) }}">
+							<a href="#">
 									<i class="material-icons" data-toggle="tooltip" title="Edit">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
 										<path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
 										</svg>
 									</i>
 							</a>
-							<a href="{{ route('delete',$enseignants[$i]->id) }}" >
+							<a href="#deleteEmployeeModal" class="deletematiere" data-toggle="modal" data-id="{{ $enseignants[$i]->id }}" >
 							<i>  
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -74,6 +74,29 @@
 					
         </div>
     </div>
+</div>
+
+<div id="deleteEmployeeModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="Post" action="{{ route('deletecontr') }} ">
+			@csrf
+				<div class="modal-header">						
+					<h4 class="modal-title">Supprimer Enseignants</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>êtes vous sûr de vouloir supprimmer cet enseignant ?</p>
+					<p class="text-danger"><small>Cette action est irreversible</small></p>
+					<input type="hidden" name="valeursup" id="valeursup" value="">
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <div id="addEmployeeModal" class="modal fade">
@@ -121,6 +144,7 @@
 		</div>
 	</div>
 </div>
+
 
 
 

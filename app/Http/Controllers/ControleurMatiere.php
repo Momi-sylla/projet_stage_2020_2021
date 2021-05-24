@@ -45,7 +45,7 @@ public function storeMatieres(){
         }
        $matieres->id_ens=$ens_id;
         $matieres->save();
-           return back();
+           return back()->with('success', 'Matière enregistrée Avec Succès');
     }
 
 

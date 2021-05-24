@@ -26,4 +26,21 @@ $(document).on("click", ".addconstraint", function () {
        $("#cont").val( x );
    
    });
+   $(document).on("click", ".deletematiere", function () {
+      console.log('tu mas cliqué');
+          var x = $(this).data('id');
+         $("#valeursup").val( x );
+     
+     });
+
+     $(document).on("click", ".deleteuser", function () {
+        console.log('tu mas cliqué');
+            var x = $(this).data('id');
+           $("#valeurusersup").val( x );
+       
+       });
+  
+   setTimeout(function() {
+    $('#messagesuccess').fadeOut('slow');
+    },1000); 
    
