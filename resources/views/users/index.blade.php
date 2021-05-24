@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Espace User!') }}
+                    {{ __('Bienvenue M. ') }} {{ Auth::user()->name }}
                 </div>
             </div>
         </div>

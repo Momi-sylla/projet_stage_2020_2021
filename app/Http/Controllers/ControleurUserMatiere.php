@@ -43,7 +43,7 @@ class ControleurUserMatiere extends Controller
         $nom_mat=Matieres::where('id_ens','=',$ens_id)->get();
           $salle_se = array() ;
           $cont =array();
-          $typecontseance = array();
+          $typecontseance_cm = array();
         $parts_cm = Parts::where('id_mat','=',$id)->where('nom','like','CM%')->get();
           $seances_cm = array();
             foreach($parts_cm as $pcm){
@@ -54,7 +54,7 @@ class ControleurUserMatiere extends Controller
                     foreach($seances_cm as $scm){
                         $x [] = Seances::find($scm->id)->salles->toArray();
 
-                        $typecontseance [] = DB::table('seances')->join('contraintesseances', 'seances.id', '=', 'contraintesseances.id_seance')
+                        $typecontseance_cm [] = DB::table('seances')->join('contraintesseances', 'seances.id', '=', 'contraintesseances.id_seance')
                         ->join('typecontraintes','contraintesseances.type','=','typecontraintes.id')
                         ->where('seances.id','=',$scm->id)
                         ->select('contraintesseances.arguments','typecontraintes.nom')->get();
@@ -79,6 +79,7 @@ class ControleurUserMatiere extends Controller
             $parts_td = Parts::where('id_mat','=',$id)->where('nom','like','TD%')->get();
            // dd($parts_td);
          $seances_td=0;
+         $typecontseance_td = array();
         $salle_td = array();
             foreach($parts_td as $ptd){
                 $seances_td = Seances::where('id_part','=',$ptd->id)->get();
@@ -87,6 +88,10 @@ class ControleurUserMatiere extends Controller
                     $x = array();
                     foreach($seances_td as $std){
                         $x [] = Seances::find($std->id)->salles->toArray();
+                        $typecontseance_td [] = DB::table('seances')->join('contraintesseances', 'seances.id', '=', 'contraintesseances.id_seance')
+                        ->join('typecontraintes','contraintesseances.type','=','typecontraintes.id')
+                        ->where('seances.id','=',$std->id)
+                        ->select('contraintesseances.arguments','typecontraintes.nom')->get();
                     
 
                     }
@@ -97,7 +102,9 @@ class ControleurUserMatiere extends Controller
             //dd($seances_td);
             $parts_tp = Parts::where('id_mat','=',$id)->where('nom','like','TP%')->get();
             $seances_tp=0;
+
             $salle_tp= array();
+            $typecontseance_tp=array();
             foreach($parts_tp as $ptp){
                 $seances_tp = Seances::where('id_part','=',$ptp->id)->get();
                 if(gettype($seances_tp)=='object'){
@@ -105,7 +112,11 @@ class ControleurUserMatiere extends Controller
                     $x = array();
                     foreach($seances_tp as $stp){
                       $x [] = Seances::find($stp->id)->salles->toArray();
-
+                      $typecontseance_tp [] = DB::table('seances')->join('contraintesseances', 'seances.id', '=', 'contraintesseances.id_seance')
+                      ->join('typecontraintes','contraintesseances.type','=','typecontraintes.id')
+                      ->where('seances.id','=',$stp->id)
+                      ->select('contraintesseances.arguments','typecontraintes.nom')->get();
+                  
                     }
                     $salle_tp=$x;
                 }
@@ -115,6 +126,7 @@ class ControleurUserMatiere extends Controller
             $parts_ctd = Parts::where('id_mat','=',$id)->where('nom','like','CTD%')->get();
             $seances_ctd = 0;
             $salle_ctd =array();
+            $typecontseance_ctd = array();
             foreach($parts_ctd as $pctd){
                 $seances_ctd = Seances::where('id_part','=',$pctd->id)->get();
                 if(gettype($seances_ctd)=='object'){
@@ -122,6 +134,10 @@ class ControleurUserMatiere extends Controller
                     $x = array();
                     foreach($seances_ctd as $sctd){
                         $x [] = Seances::find($sctd->id)->salles->toArray();
+                        $typecontseance_ctd [] = DB::table('seances')->join('contraintesseances', 'seances.id', '=', 'contraintesseances.id_seance')
+                        ->join('typecontraintes','contraintesseances.type','=','typecontraintes.id')
+                        ->where('seances.id','=',$sctd->id)
+                        ->select('contraintesseances.arguments','typecontraintes.nom')->get();
                     }
                     $salle_ctd=$x;
                     }
@@ -132,12 +148,13 @@ class ControleurUserMatiere extends Controller
            // dd($typecontraintes);
 
 
-        return View('users.VueMatiere',compact('nom_mat','seances_cm','parts_cm','seances_td','parts_td','seances_tp','parts_tp','seances_ctd','parts_ctd','salles','salle_se','salle_td','salle_tp','salle_ctd','typecontraintes','typecontseance'));
+        return View('users.VueMatiere',compact('nom_mat','seances_cm','parts_cm','seances_td','parts_td','seances_tp','parts_tp','seances_ctd','parts_ctd','salles','salle_se','salle_td','salle_tp','salle_ctd','typecontraintes','typecontseance_cm','typecontseance_td','typecontseance_tp','typecontseance_ctd'));
     }
 
     public function editseancesalle(){
         $salles = request('namesalle');
         $seance = request('nameseance');
+        if(request('action')=='ajouter'){
        foreach($salles as $salle){
         $salle_id = Salles::where('nom','=',$salle)->get();
        // dd($salle_id[0]->id);
@@ -148,6 +165,20 @@ class ControleurUserMatiere extends Controller
         $salles_seance->save();
         
        }
+    }
+    else 
+        {
+            DB::delete('delete from salles_seances where id_seance = ?',[$seance]);
+            foreach($salles as $salle){
+                $salle_id = Salles::where('nom','=',$salle)->get();
+               // dd($salle_id[0]->id);
+                //dd($salle);
+                $salles_seance = new Salles_seances();
+                $salles_seance->id_salle=$salle_id[0]->id;
+                $salles_seance->id_seance = $seance;
+                $salles_seance->save();
+            }        
+        }
        return back();
     }
 
@@ -163,6 +194,25 @@ class ControleurUserMatiere extends Controller
       $contrainte->type = $type_id[0]->id;
       $contrainte->arguments = $arg;
       $contrainte->save();
+        return back();
+    }
+
+    public function deletecontr(){
+        $id_seance = (int)request('cont');
+       
+        $suppcont = request('suppcont');
+      if(!empty($suppcont)){
+          foreach ( $suppcont as $supp ){
+              if($supp=='salles'){
+                  DB::delete('delete from salles_seances where id_seance = ?',[$id_seance]);
+              }
+              if($supp=='contraintes'){
+                DB::delete('delete from contraintesseances where id_seance = ?',[$id_seance]);
+              }
+          }
+          return back();
+      }
+      else
         return back();
     }
 }
