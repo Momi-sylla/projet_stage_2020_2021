@@ -47,3 +47,7 @@ Route::post('/showMatiere/{id}',[App\Http\Controllers\ControleurMatiere::class, 
 Route::get('/vueMatiere/{id}',[App\Http\Controllers\ControleurUserMatiere::class, 'userindex'])->name('userindex');
 Route::post('editseancesalle',[App\Http\Controllers\ControleurUserMatiere::class, 'editseancesalle'])->name('editseancesalle');
 Route::post('ajoutcontrainte',[App\Http\Controllers\ControleurUserMatiere::class, 'ajoutcontrainte'])->name('ajoutcontrainte');
+Route::post('deletecontrmat',[App\Http\Controllers\ControleurUserMatiere::class, 'deletecontrmat'])->name('deletecontrmat');
+Route::get('/vuepartie/{id}',[App\Http\Controllers\ControleurUserMatiere::class, 'showparties'])->name('showparties');
+Route::post('editnombreenseignant',[App\Http\Controllers\ControleurUserMatiere::class, 'editnombreenseignant'])->name('editnombreenseignant');
+Route::post('editnombresalle',[App\Http\Controllers\ControleurUserMatiere::class, 'editnombresalle'])->name('editnombresalle');

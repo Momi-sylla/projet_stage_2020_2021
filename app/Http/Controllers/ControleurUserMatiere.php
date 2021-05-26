@@ -38,7 +38,7 @@ class ControleurUserMatiere extends Controller
               $ens_id=$y->id;
           }
 
-
+          $id_matiere=$id;
 
         $nom_mat=Matieres::where('id_ens','=',$ens_id)->get();
           $salle_se = array() ;
@@ -148,7 +148,7 @@ class ControleurUserMatiere extends Controller
            // dd($typecontraintes);
 
 
-        return View('users.VueMatiere',compact('nom_mat','seances_cm','parts_cm','seances_td','parts_td','seances_tp','parts_tp','seances_ctd','parts_ctd','salles','salle_se','salle_td','salle_tp','salle_ctd','typecontraintes','typecontseance_cm','typecontseance_td','typecontseance_tp','typecontseance_ctd'));
+        return View('users.VueMatiere',compact('nom_mat','seances_cm','parts_cm','seances_td','parts_td','seances_tp','parts_tp','seances_ctd','parts_ctd','salles','salle_se','salle_td','salle_tp','salle_ctd','typecontraintes','typecontseance_cm','typecontseance_td','typecontseance_tp','typecontseance_ctd','id_matiere'));
     }
 
     public function editseancesalle(){
@@ -179,7 +179,7 @@ class ControleurUserMatiere extends Controller
                 $salles_seance->save();
             }        
         }
-       return back();
+       return back()->with('success', 'action effectuée avec succès');
     }
 
     public function ajoutcontrainte(){
@@ -194,10 +194,10 @@ class ControleurUserMatiere extends Controller
       $contrainte->type = $type_id[0]->id;
       $contrainte->arguments = $arg;
       $contrainte->save();
-        return back();
+        return back()->with('success', 'contrainte ajoutée avec succès');
     }
 
-    public function deletecontr(){
+    public function deletecontrmat(){
         $id_seance = (int)request('cont');
        
         $suppcont = request('suppcont');
@@ -210,9 +210,72 @@ class ControleurUserMatiere extends Controller
                 DB::delete('delete from contraintesseances where id_seance = ?',[$id_seance]);
               }
           }
-          return back();
+          return back()->with('success', 'action effectuée  avec succès');
       }
       else
-        return back();
+        return back()->with('fail', 'erreur');
     }
+
+
+
+
+    public function showparties($id){
+       // dd('bonjour');
+       $user_id = request()->user()->id;
+       $enseignants = Enseignants::all();
+       $x=array();
+         $x=User::find($user_id)->enseignants->each(function($r){
+                   return $r->nom;
+         });
+        
+         foreach($x as $y){
+             $ens_id=$y->id;
+         }
+       $nom_mat=Matieres::where('id_ens','=',$ens_id)->get();
+       $typeparts [] = DB::table('parts')
+       ->where('id_mat','=',$id)
+       ->select('parts.*')->get();
+      // dd($typeparts);
+
+        return View('users.vuepartie',compact('nom_mat','typeparts','id'));
+    }
+
+    public function editnombreenseignant(){
+
+       $id_part = request('id_part');
+      // dd($id_part);
+       try{
+        $part = Parts::find($id_part);
+        $nombre_enseignant = request('nb_ens');
+        
+        $part->nb_ens = $nombre_enseignant;
+        $part->save();
+        return back()->with('success', 'nombre d\'enseignant modifié avec succès');
+    }
+    catch(QueryException $ex){
+        return  back()->with('fail', 'Oups! une erreur est survenue !');
+    }
+       
+    }
+
+    public function editnombresalle(){
+
+        $id_part = request('id_partsalle');
+      //   dd($id_part);
+         try{
+          $part = Parts::find($id_part);
+          $nombre_salle = request('nb_salle');
+          
+          $part->nb_salle = $nombre_salle;
+          $part->save();
+          return back()->with('success', 'nombre de salle modifié avec succès');
+      }
+      catch(QueryException $ex){
+          return  back()->with('fail', 'Oups! une erreur est survenue !');
+      }
+         
+        
+     }
+
+   
 }

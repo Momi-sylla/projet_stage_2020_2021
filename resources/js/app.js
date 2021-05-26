@@ -34,13 +34,29 @@ $(document).on("click", ".addconstraint", function () {
      });
 
      $(document).on("click", ".deleteuser", function () {
-        console.log('tu mas cliqué');
+      //  console.log('tu mas cliqué');
             var x = $(this).data('id');
            $("#valeurusersup").val( x );
+       
+       });
+       $(document).on("click", ".modifenseign", function () {
+       console.log('tu mas cliqué');
+            var x = $(this).data('id');
+           $("#id_part").val( x );
+       
+       });
+       $(document).on("click", ".modifsalle", function () {
+       // console.log('tu mas cliqué');
+            var x = $(this).data('id');
+           $("#id_partsalle").val( x );
        
        });
   
    setTimeout(function() {
     $('#messagesuccess').fadeOut('slow');
-    },1000); 
+    },2000); 
    
+    setTimeout(function() {
+        $('#messageechec').fadeOut('slow');
+        },2000); 
+       

@@ -110,6 +110,10 @@
     <div class="alert alert-success" id='messagesuccess'>
         {{ session()->get('success') }}
     </div>
+    @elseif(session()->has('fail'))
+    <div class="alert alert-danger" id='messageechec'>
+        {{ session()->get('fail') }}
+    </div>
 @endif
             @yield('content')
 

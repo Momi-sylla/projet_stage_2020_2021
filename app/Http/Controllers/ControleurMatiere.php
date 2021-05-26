@@ -9,6 +9,8 @@ use App\Models\Seances;
 use App\Models\Typeparts;
 
 use App\Models\Matieres;
+use Illuminate\Support\Facades\DB;
+
 class ControleurMatiere extends Controller
 {
     public function __construct(){
@@ -16,12 +18,13 @@ class ControleurMatiere extends Controller
         $this->middleware('role:admin');
     }
 
+
+
     public function indexMatieres(){
        $matieres = Matieres::all();
         $enseignants = Enseignants::all();
        $ens_name = array();
-       //$x=array();
-      // Matieres::find(22);
+     
         foreach ($matieres as $list){
            $ens_name[]= Matieres::find($list->id)->enseignants->nom;
         }
@@ -47,6 +50,7 @@ public function storeMatieres(){
         $matieres->save();
            return back()->with('success', 'Matière enregistrée Avec Succès');
     }
+
 
 
     public function show($id){
@@ -98,6 +102,9 @@ public function storeMatieres(){
         return view('VueMatiere',compact('matiere','cpt_cm','cpt_td','cpt_tp','cpt_ctd','bool'));
     }
 
+   
+   
+   
     public function storeseances(){
         $typeparts = Typeparts::all();
         $cm = (int) request('nb_cm');
@@ -105,7 +112,8 @@ public function storeMatieres(){
         $tp = (int) request('nb_tp');
         $ctd = (int) request('nb_ctd');
         
-          
+        try{ 
+
         $infos_cm=Typeparts::Where('nom','=','CM')->get();
         foreach($infos_cm as $infos){
             $id_cm = $infos->id;
@@ -193,5 +201,11 @@ public function storeMatieres(){
         }
  
         return back();
+        }
+    
+catch(QueryException $ex){
+    return back()->with('fail', 'Oups! une erreur est survenue !');
+
 }
+    }
 }

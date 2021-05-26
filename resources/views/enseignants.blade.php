@@ -43,12 +43,12 @@
 				
 				
                 <tbody>
-				    @for ($i=0;$i<count($enseignants);$i++)
+				@foreach($enseignants[0] as $ens)
 					<tr>
 					
-						<td>{{$enseignants[$i]->id }}</td>
-						<td>{{$enseignants[$i]->nom}}</td>
-						<td>{{$roles[$i] }}</td>
+						<td>{{$ens->id }}</td>
+						<td>{{$ens->nom_ens}}</td>
+						<td>{{$ens->id_user}}</td>
 						
 						<td>
 							<a href="#">
@@ -58,7 +58,7 @@
 										</svg>
 									</i>
 							</a>
-							<a href="#deleteEmployeeModal" class="deletematiere" data-toggle="modal" data-id="{{ $enseignants[$i]->id }}" >
+							<a href="#deleteEmployeeModal" class="deletematiere" data-toggle="modal" data-id="{{ $ens->id }}" >
 							<i>  
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 											<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -68,7 +68,7 @@
 							</a>
 						</td>
                     </tr>
-                    @endfor
+                    @endforeach
                 </tbody>
             </table>
 					
